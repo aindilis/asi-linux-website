@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ASI Linux - A rebrand of FRDCSA's Panoply GNU/Linux. Experimental distribution currently in preparation.">
+    <meta name="keywords" content="ASI Linux, FRDCSA, Panoply, GNU/Linux, Linux Distribution, Open Source">
+    <title>ASI Linux - Coming Soon</title>
+    <style>
+        :root {
+            --primary-color: #0066cc;
+            --secondary-color: #004080;
+            --accent-color: #00aaff;
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --border-color: #e0e0e0;
+            --warning-bg: #fff3cd;
+            --warning-border: #ffc107;
+            --warning-text: #856404;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-white);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-white);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--text-dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            font-weight: 400;
+        }
+
+        .hero .tagline {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background-color: var(--warning-bg);
+            border: 2px solid var(--warning-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: start;
+            gap: 1rem;
+        }
+
+        .warning-icon {
+            font-size: 1.5rem;
+            color: var(--warning-text);
+            flex-shrink: 0;
+        }
+
+        .warning-content h3 {
+            color: var(--warning-text);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .warning-content p {
+            color: var(--warning-text);
+            line-height: 1.6;
+        }
+
+        /* Content Sections */
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        /* Info Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-card {
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .info-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .info-card p {
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+
+        /* Timeline */
+        .timeline {
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .timeline h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .timeline-item {
+            padding-left: 2rem;
+            border-left: 3px solid var(--primary-color);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 0;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+        }
+
+        .timeline-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .timeline-item p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        .timeline-item.active {
+            border-left-color: var(--accent-color);
+        }
+
+        .timeline-item.active:before {
+            background-color: var(--accent-color);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-light);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-content p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero .tagline {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-4 {
+            margin-top: 2rem;
+        }
+
+        .mb-2 {
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="/" class="logo">ASI <span>Linux</span></a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>ASI Linux</h1>
+                <p class="subtitle">A Rebrand of FRDCSA's Panoply GNU/Linux</p>
+                <p class="tagline">Comprehensive AI-powered infrastructure for life planning and research</p>
+                <div class="status-badge">⚙️ IN PREPARATION</div>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="warning-box">
+                <div class="warning-icon">⚠️</div>
+                <div class="warning-content">
+                    <h3>Experimental Software Notice</h3>
+                    <p>ASI Linux is currently in active development and undergoing rigorous testing. This is experimental software not yet ready for public release. We are conducting comprehensive licensing compliance audits and system validation before making the distribution available for download.</p>
+                </div>
+            </div>
+
+            <section class="section">
+                <h2>About ASI Linux</h2>
+                <p>ASI Linux represents a significant evolution of the FRDCSA (Formalized Research Database: Cluster, Study and Apply) project's Panoply distribution. Built on over 26 years of research and development, this distribution brings together sophisticated AI infrastructure and formal reasoning systems into a cohesive GNU/Linux environment.</p>
+                <p>The rebrand to ASI Linux marks a new phase in making these powerful tools accessible to researchers, developers, and power users who need advanced decision support and knowledge management capabilities.</p>
+            </section>
+
+            <section class="section">
+                <h2>What is FRDCSA?</h2>
+                <p>The Formalized Research Database: Cluster, Study and Apply (FRDCSA) is a comprehensive AI infrastructure system comprising over 1,000 integrated subsystems. Since 1998, FRDCSA has been developed to advance capabilities in automated reasoning, knowledge representation, and intelligent planning.</p>
+                <p>The centerpiece is the Free Life Planner (FLP), designed to help users manage complex life decisions across finances, health, logistics, and daily planning through AI-powered decision support systems.</p>
+            </section>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>🔬 Research Foundation</h3>
+                    <p>Built on decades of formal methods research, integrating Prolog-based reasoning systems with modern AI capabilities.</p>
+                </div>
+                <div class="info-card">
+                    <h3>🛠️ Comprehensive Tooling</h3>
+                    <p>Over 1,000 integrated subsystems for knowledge representation, automated planning, and intelligent decision support.</p>
+                </div>
+                <div class="info-card">
+                    <h3>💾 FLOSS Commitment</h3>
+                    <p>Free/Libre and Open Source Software principles guide all development, ensuring transparency and community collaboration.</p>
+                </div>
+            </div>
+
+            <section class="section mt-4">
+                <h2>Development Status</h2>
+                <div class="timeline">
+                    <h3>Current Progress</h3>
+                    <div class="timeline-item active">
+                        <h4>🔍 Licensing Compliance Audit (Current)</h4>
+                        <p>Conducting comprehensive review of all software components to ensure full licensing compliance and proper attribution.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>✅ System Testing & Validation</h4>
+                        <p>Rigorous testing of core functionality and integration verification across all FRDCSA subsystems.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>📦 Package Preparation</h4>
+                        <p>Preparing official distribution packages, including Vagrant images and installation media.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>📚 Documentation</h4>
+                        <p>Creating comprehensive user guides, system documentation, and developer resources.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>🚀 Public Release</h4>
+                        <p>Official launch with download availability, community support channels, and collaboration infrastructure.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section mt-4">
+                <h2>Stay Updated</h2>
+                <p>ASI Linux is being prepared with great care to ensure a high-quality release that meets the standards established by 26 years of FRDCSA development. We are committed to releasing only when the distribution meets our criteria for stability, security, and usability.</p>
+                <p class="text-center mt-4"><strong>Expected availability: Q1 2026</strong></p>
+            </section>
+
+            <section class="section mt-4">
+                <h2>Technical Approach</h2>
+                <p>ASI Linux integrates classical symbolic AI approaches with modern computational methods. The system emphasizes formal verification, logical reasoning (particularly Prolog-based systems), and comprehensive knowledge representation. This makes it uniquely suited for research applications, complex decision support, and scenarios requiring rigorous logical analysis.</p>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p><strong>ASI Linux</strong> - A rebrand of FRDCSA's Panoply GNU/Linux</p>
+            <p>© 2026 FRDCSA Project. Free and Open Source Software.</p>
+            <div class="footer-links">
+                <a href="http://github.com/aindilis">FRDCSA on GitHub</a>
+                <a href="mailto:adougher9@yahoo.com">Contact</a>
+            </div>
+            <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.7;">
+                This website establishes the ASI Linux trademark and brand identity.<br>
+                Distribution software is currently in preparation and not yet available for download.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
